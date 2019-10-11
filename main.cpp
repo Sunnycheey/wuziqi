@@ -3,36 +3,37 @@
 #include "./logical/judge.cpp"
 #include "./logical/play.cpp"
 
+using std::cin; 
 int main(){
     // make a board
     board b;
     player p = player1;
     // set inital row and column
-    std::cout << "please indicate the row and column of board" << std::endl;
-    std::cin >> ROW >> COLUMN;
+    cout << "please indicate the row and column of board" << endl;
+    cin >> ROW >> COLUMN;
     if(ROW < 0 || COLUMN < 0) {
-        std::cout << "The value of ROW and COLUMN should big than zero!";
+        cout << "The value of ROW and COLUMN should big than zero!";
         return -1;
     }
     while(true){
-        std::cout << "\033[2J\033[1;1H";"]]";
+        cout << "\033[2J\033[1;1H";"]]";
         b.display(); 
         int x, y;
-        std::cout << "player" << p + 1<< " pieces location: (in x, y format)" << std::endl;
-        std::cin >> x >> y;
+        cout << "player" << p + 1<< " pieces location: (in x, y format)" << endl;
+        cin >> x >> y;
         // verificate whether x and y are valid
         if(x >= ROW || x < 0 || y > COLUMN || y < 0) {
-            std::cout << "Pieces cannot given the position out of board!" << std::endl;
+            cout << "Pieces cannot given the position out of board!" << endl;
             return -1;
         }
         point c(x,y);
         if(!play(&b, &c, p)) {
-            std::cout << "The position is already used!" << std::endl;
+            cout << "The position is already used!" << endl;
             return -1;
         }
         terminfo t = b.isterminated();
         if(t.win == true){
-            std::cout << "player" << t.p+1 << "win!" << std::endl; 
+            cout << "player" << t.p+1 << "win!" << endl; 
             return 0;
         } 
         p = (p==player1)?player2:player1;
