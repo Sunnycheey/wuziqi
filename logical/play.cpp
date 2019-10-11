@@ -1,5 +1,4 @@
 #include "../board/board.hpp"
-#include <iostream>
 
 bool haspieces(board *b, point *c){
     for(auto it = b->v.begin(); it != b->v.end(); ++it){
