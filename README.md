@@ -8,6 +8,12 @@ Source file in logical folder define some logical operate of board.
 
 This two folder is further used by main function.
 
+## Compile
+
+The source can be complied by tools such as g++ and clang++, an example is
+```bash
+$ clang++ main.cpp
+```
 ## Todo:
 
 - [ ] Adding ncurses feature
