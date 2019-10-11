@@ -7,6 +7,13 @@ int main(){
     // make a board
     board b;
     player p = player1;
+    // set inital row and column
+    std::cout << "please indicate the row and column of board" << std::endl;
+    std::cin >> ROW >> COLUMN;
+    if(ROW < 0 || COLUMN < 0) {
+        std::cout << "The value of ROW and COLUMN should big than zero!";
+        return -1;
+    }
     while(true){
         std::cout << "\033[2J\033[1;1H";"]]";
         b.display(); 

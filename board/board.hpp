@@ -5,8 +5,8 @@
 #include<vector>
 
 // identify the row and column of board
-const int ROW = 20;
-const int COLUMN = 20;
+int ROW;
+int COLUMN;
 enum player {
     player1, player2
 };
