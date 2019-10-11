@@ -6,4 +6,4 @@ Source file in logical folder define some logical operate of board.
 
 This two folder is further used by main function.
 
-
+![](https://github.com/Sunnycheey/wuziqi/blob/master/demo.gif)
