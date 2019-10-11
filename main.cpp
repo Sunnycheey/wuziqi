@@ -16,7 +16,7 @@ int main(){
         // verificate whether x and y are valid
         if(x >= ROW || x < 0 || y > COLUMN || y < 0) return -1;
         point c(x,y);
-        play(&b, &c, p);
+        if(!play(&b, &c, p)) return -1;
         terminfo t = isterminated(&b);
         if(t.win == true){
             std::cout << "player" << t.p+1 << "win!" << std::endl; 
