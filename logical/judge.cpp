@@ -44,13 +44,12 @@ bool verification(std::vector<point>* p){
     }
     return false;
 }
-terminfo isterminated(board* b){
+terminfo board::isterminated(){
     // find whether a game is terminated by the status of the game borad
     // find all pieces belongs to player1 and player2
     // return structed data pairs (bool win, player p), if the game is terminated, win is set true and p is set to the winner. win is set false otherwise.
     std::vector<point> p1;
     std::vector<point> p2;
-    auto v = b->v;
     for(auto it = v.begin(); it != v.end(); ++it){
        if(it->p == player1) p1.push_back(it->c);
        if(it->p == player2) p2.push_back(it->c);
