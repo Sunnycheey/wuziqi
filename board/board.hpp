@@ -40,11 +40,15 @@ class board {
     // this class describe the status of board, i.e. full list of pieces
 public:
     std::vector<position> v;
-   board(){
+    board(){
        // contructor for board
        // make a empty board
-       v.clear();
-   }
+        v.clear();
+    }
+    // display functino is implemented in display.cpp
+    void display();
+    terminfo isterminated(); 
+    bool haspieces(point *c);
 };
 bool exist(std::vector<point> *p, point* c);
 #endif

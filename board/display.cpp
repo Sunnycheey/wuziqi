@@ -1,12 +1,11 @@
 #include "board.hpp"
 #include <iostream>
 
-void display(board* b){
+void board::display(){
     // this function is used to display the game board
     // we use * to represent the blank position of board, + represent the pieces of player1 and - represent the pieces of player2.
     std::vector<point> p1;
     std::vector<point> p2;
-    auto v = b->v;
     for(auto it = v.begin(); it != v.end(); ++it){
        if(it->p == player1) p1.push_back(it->c);
        if(it->p == player2) p2.push_back(it->c);
