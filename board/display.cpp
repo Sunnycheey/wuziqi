@@ -20,15 +20,18 @@ void board::display(){
     noecho();
     keypad(stdscr, TRUE);
     // make an original board
-    // int row, column;
-    // getmaxyx(stdscr, row, column);
-    for(int i = 0; i < ROW; i++){
-        for(int j = 0; j < COLUMN; j++){
+    // set the board to center of stdscr
+    int row, column;
+    getmaxyx(stdscr, row, column);
+    start_row = row/2-ROW/2; start_column = column/2-COLUMN/2;
+    end_row = row/2+ROW/2; end_column = column/2+COLUMN/2;
+    for(int i = start_row; i < end_row; i++){
+        for(int j = start_column; j < end_column; j++){
             mvaddch(i, j, '*');
         }
     }
-    // set the position of cursor to (0, 0)
-    move(0,0);
+    // set the position of cursor to the start of board
+    move(start_row, start_column);
     refresh();
     while(true){
         int ch = getch();
@@ -37,27 +40,33 @@ void board::display(){
             case KEY_LEFT:
                 // move the window to left by one unit
                getyx(stdscr, p.x, p.y);
-               if(p.y != 0) move(p.x, p.y-1);
+               if(p.y != start_column) move(p.x, p.y-1);
+               else{
+                   // move cursor to the upper rightmost position
+                   if(p.x-1 != start_row) move(p.x-1, end_column); 
+               }
                refresh();
-               // else do nothig
                 break;
             case KEY_RIGHT:
                 getyx(stdscr, p.x, p.y);
-                if(p.y != COLUMN-1) move(p.x, p.y+1);
+                if(p.y != end_column) move(p.x, p.y+1);
+                else{
+                    if(p.x+1 != end_row) move(p.x+1, start_column);
+                }
                 refresh();
                 break;
             case KEY_UP:
                 getyx(stdscr, p.x, p.y);
-                if(p.x != 0) move(p.x-1, p.y);
+                if(p.x != start_row) move(p.x-1, p.y);
                 refresh();
                 break;
             case KEY_DOWN:
                 getyx(stdscr, p.x, p.y);
-                if(p.x != ROW-1) move(p.x+1, p.y);
+                if(p.x != end_row) move(p.x+1, p.y);
                 refresh();
                 break;
             case 10:
-                // case 10 represent enter
+                // represent enter key
                 getyx(stdscr, p.x, p.y);
                 if(user == player1) {
                     addch('+');
@@ -66,8 +75,8 @@ void board::display(){
                     addch('-');
                 }
                 if(!play(this, &p, user)){
-                    return ;
                     endwin();
+                    return;
                 }
                 terminfo t = this->isterminated();
                 if(t.win == true){

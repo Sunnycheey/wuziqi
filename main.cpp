@@ -13,12 +13,12 @@ int main(){
         return -1;
     }
     while(true){
-        int x, y;
-        // verificate whether x and y are valid
-        if(x >= ROW || x < 0 || y > COLUMN || y < 0) {
-            cout << "Pieces cannot given the position out of board!" << endl;
-            return -1;
-        }
+        /* int x, y; */
+        /* // verificate whether x and y are valid */
+        /* if(x > b.end_row || x < b.start_row || y > b.end_column || y < start_column) { */
+        /*     cout << "Pieces cannot given the position out of board!" << endl; */
+        /*     return -1; */
+        /* } */
         b.display();
     return -1;
     }

@@ -40,6 +40,7 @@ class board {
     // this class describe the status of board, i.e. full list of pieces
 public:
     std::vector<position> v;
+    int start_row, start_column, end_row, end_column;
     board(){
        // contructor for board
        // make a empty board
