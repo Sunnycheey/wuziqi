@@ -34,7 +34,17 @@ bool verification(vector<point>* p, int start_row, int start_column, int end_row
             }
         }
         // for slah relation（斜线的关系）
+        // there are two different slash relation e.g (0,0),(1,1),...(4,4) and (4,0),(3,1),...,(0,4)
         for(int i = it->x+1, j = it->y+1; i < end_row && j < end_column; i++,j++){
+            if(count == 5) return true;
+            point tmp(i, j);
+            if(exist(p, &tmp)) count++;
+            else{
+                count = 1;
+                break;
+            }
+        }
+        for(int i = it->x+1, j = it->y-1; i < end_row && j > start_column; i++, j--){
             if(count == 5) return true;
             point tmp(i, j);
             if(exist(p, &tmp)) count++;

@@ -25,6 +25,7 @@ void board::display(){
     getmaxyx(stdscr, row, column);
     start_row = row/2-ROW/2; start_column = column/2-COLUMN/2;
     end_row = row/2+ROW/2; end_column = column/2+COLUMN/2;
+    mvprintw(start_row-2, start_column, "Player %d:", user+1);
     for(int i = start_row; i < end_row; i++){
         for(int j = start_column; j < end_column; j++){
             mvaddch(i, j, '*');
@@ -38,6 +39,7 @@ void board::display(){
         point p(0,0);
         switch(ch){
             case KEY_LEFT:
+            case 'h':
                 // move the window to left by one unit
                getyx(stdscr, p.x, p.y);
                if(p.y != start_column) move(p.x, p.y-1);
@@ -48,6 +50,7 @@ void board::display(){
                refresh();
                 break;
             case KEY_RIGHT:
+            case 'l':
                 getyx(stdscr, p.x, p.y);
                 if(p.y != end_column) move(p.x, p.y+1);
                 else{
@@ -56,35 +59,52 @@ void board::display(){
                 refresh();
                 break;
             case KEY_UP:
+            case 'k':
                 getyx(stdscr, p.x, p.y);
                 if(p.x != start_row) move(p.x-1, p.y);
                 refresh();
                 break;
             case KEY_DOWN:
+            case 'j':
                 getyx(stdscr, p.x, p.y);
                 if(p.x != end_row) move(p.x+1, p.y);
                 refresh();
                 break;
             case 10:
+            case ' ':
                 // represent enter key
                 getyx(stdscr, p.x, p.y);
+                if(!play(this, &p, user)){
+                    mvprintw(start_row-1, start_column, "The location is aldreay used! press any key to continue");
+                    move(p.x, p.y);
+                    refresh();
+                    getch();
+                    move(start_row-1, start_column);
+                    // clear line
+                    clrtoeol();
+                    move(p.x, p.y);
+                    refresh();
+                    continue;
+                }
                 if(user == player1) {
                     addch('+');
                 }
                 else if(user == player2) {
                     addch('-');
                 }
-                if(!play(this, &p, user)){
-                    endwin();
-                    return;
-                }
                 terminfo t = this->isterminated();
                 if(t.win == true){
+                    // print win information
+                    mvprintw(start_row-1, start_column, "Game over, Winner is: Player %d", t.p+1);
+                    refresh();
+                    getch();
                     endwin();
                     return;
                 }
-                refresh();
                 user = (user==player1)?player2:player1;
+                mvprintw(start_row-2, start_column, "Player %d:", user+1);
+                move(p.x, p.y);
+                refresh();
                 break;
         }
     }
