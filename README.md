@@ -17,8 +17,9 @@ $ clang++ main.cpp -std=c++11
 ## Todo:
 
 - [x] Adding ncurses feature
-- [ ] Adding some prompt information in game
-
+- [x] Adding some prompt information in game
+- [ ] completing the logical part
+- [ ] display more pretty board
 ## demo
 
 ![](https://github.com/Sunnycheey/wuziqi/blob/master/demo.gif)
