@@ -12,11 +12,12 @@ This two folder is further used by main function.
 
 The source can be complied by tools such as g++ and clang++, an example is
 ```bash
-$ clang++ main.cpp
+$ clang++ main.cpp -std=c++11
 ```
 ## Todo:
 
-- [ ] Adding ncurses feature
+- [x] Adding ncurses feature
+- [ ] Adding some prompt information in game
 
 ## demo
 
