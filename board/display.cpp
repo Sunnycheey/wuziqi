@@ -70,6 +70,9 @@ void board::display(){
                 if(p.x != end_row) move(p.x+1, p.y);
                 refresh();
                 break;
+            case 'q':
+                endwin();
+                return;
             case 10:
             case ' ':
                 // represent enter key
